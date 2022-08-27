@@ -1,0 +1,182 @@
+E_{1}& hhpp& 0.25 * einsum('abij,abij->', td, gs[v,v,o,o])&&
+S_{1}& ph& einsum('ai->ai',fs[v,o])&&
+S_{2a}& hp& einsum('kc,acik->ai', fs[o,v], td)&& 
+S_{3a}& pp& einsum('ac,ci->ai', fs[v,v], ts)&&
+S_{3b}& hh& -einsum('ki,ak->ai', fs[o,o], ts)&&
+S_{5a}& hp& -einsum('kc,ci,ak->ai', fs[o,v], ts, ts)&&
+D_{2a}& pp& einsum('bc,acij->abij', fs[v,v], td)&&ab
+D_{2b}& hh& -einsum('kj,abik->abij', fs[o,o], td)&ij& 
+D_{5a}& hp& -einsum('kc,ci,abkj->abij', fs[o,v], ts, td)&ij&
+D_{5b}& hp& -einsum('kc,ak,cbij->abij', fs[o,v], ts, td)&&ab
+T_{2a}& pp& einsum('cd,abdijk->abcijk', fs[v,v], tt)&&c/ab
+T_{2b}& hh& -einsum('lk,abcijl->abcijk', fs[o,o], tt)&k/ij&
+T_{3a}& hp& -einsum('ld,adij,bclk->abcijk', fs[o,v], td, td)&k/ij&a/bc
+T_{6a}& hp& -einsum('ld,di,abcljk->abcijk', fs[o,v], ts, tt)&i/jk&
+T_{6b}& hp& -einsum('ld,al,dbcijk->abcijk', fs[o,v], ts, tt)&&a/bc
+Q_{2a}& pp& einsum('abceijkl,de->abcdijkl', tq, fs[v,v])&&d/abc
+Q_{2b}& hh& -einsum('abcdijkm,ml->abcdijkl', tq, fs[o,o])&l/ijk&
+Q_{4a}& hp& -einsum('ei,abcdmjkl,me->abcdijkl', ts, tq, fs[o,v])&i/jkl&
+Q_{4b}& hp& -einsum('am,ebcdijkl,me->abcdijkl', ts, tq, fs[o,v])&&a/bcd
+Q_{6a}& hp& -einsum('aeij,bcdmkl,me->abcdijkl', td, tt, fs[o,v])&ij/kl&a/bcd
+Q_{6b}& hp& -einsum('abim,ecdjkl,me->abcdijkl', td, tt, fs[o,v])&i/jkl&ab/cd
+D_{4a}& ppph& einsum('ci,abcj->abij', ts, gs[v,v,v,o])&ij&
+T_{1a}& ppph& einsum('adij,bcdk->abcijk', td, gs[v,v,v,o])&k/ij&a/bc
+Q_{1a}& ppph& einsum('abeijk,cdel->abcdijkl', tt, gs[v,v,v,o])&l/ijk&ab/cd
+D_{4b}& hphh& -einsum('ak,kbij->abij', ts, gs[o,v,o,o])&&ab
+T_{1b}& hphh& -einsum('abil,lcjk->abcijk', td, gs[o,v,o,o])&i/jk&c/ab
+Q_{1b}& hphh& -einsum('abcijm,mdkl->abcdijkl', tt, gs[o,v,o,o])&ij/kl&abc/d
+D_{6a}& hhhh& 0.5 * einsum('ci,dj,abcd->abij', ts, ts, gs[v,v,v,v])&ij&
+D_{2c}& hhhh& 0.5*einsum('cdij,abcd->abij', td, gs[v,v,v,v])&&
+T_{4a}& hhhh& einsum('di,ecjk,abde->abcijk', ts, td, gs[v,v,v,v])&i/jk&c/ab
+T_{2c}& hhhh& 0.5*einsum('decijk,abde->abcijk', tt, gs[v,v,v,v])&&c/ab
+Q_{3a}& hhhh& einsum('ei,fcdjkl,abef->abcdijkl', ts, tt, gs[v,v,v,v])&i/jkl&ab/cd
+Q_{5a}& hhhh& 0.5 * einsum('aeij,fdkl,bcef->abcdijkl', td, td, gs[v,v,v,v])&ij/kl&a/bc/d
+Q_{2c}& hhhh& 0.5 * einsum('efcdijkl,abef->abcdijkl', tq, gs[v,v,v,v])&&ab/cd
+D_{6b}& pppp& einsum('ak,bl,klij->abij', ts, ts, gs[o,o,o,o])&&
+D_{2d}& pppp& 0.5*einsum('abkl,klij->abij', td, gs[o,o,o,o])&&
+T_{4b}& pppp& einsum('al,bcmk,lmij->abcijk', ts, td, gs[o,o,o,o])&k/ij&a/bc
+T_{2d}& pppp& 0.5*einsum('abclmk,lmij->abcijk', tt, gs[o,o,o,o])&k/ij&
+Q_{3b}& pppp& einsum('am,bcdnkl,mnij->abcdijkl', ts, tt, gs[o,o,o,o])&ij/kl&a/bcd
+Q_{5b}& pppp& 0.5 * einsum('abim,cdnl,mnjk->abcdijkl', td, td, gs[o,o,o,o])&i/jk/l&ab/cd
+Q_{2d}& pppp& 0.5 * einsum('abcdmnkl,ijmn->abcdijkl', tq, gs[o,o,o,o])&ij/kl&
+S_{3c}& phph& einsum('ck,akic->ai', ts, gs[v,o,o,v])&&
+D_{6c}& phph& -einsum('ci,ak,kbcj->abij', ts, ts, gs[o,v,v,o])&ij&ab
+D_{2e}& phph& einsum('acik,kbcj->abij', td, gs[o,v,v,o])&ij&ab
+T_{4c}& phph& -einsum('dj,bclk,alid->abcijk', ts, td, gs[v,o,o,v])&ijk&a/bc
+T_{4d}& phph& -einsum('bl,dcjk,alid->abcijk', ts, td, gs[v,o,o,v])&i/jk&abc
+T_{2e}& phph& einsum('dbcljk,alid->abcijk', tt, gs[v,o,o,v])&i/jk&a/bc
+Q_{3c}& phph& -einsum('ej,bcdmkl,amie->abcdijkl', ts, tt, gs[v,o,o,v])&i/j/kl&a/bcd
+Q_{3d}& phph& -einsum('bm,ecdjkl,amie->abcdijkl', ts, tt,  gs[v,o,o,v])&i/jkl&a/b/cd
+Q_{5c}& phph& -einsum('aeij,bdml,mcek->abcdijkl', td, td, gs[o,v,v,o])&ij/k/l&a/c/bd
+Q_{2e}& phph& -einsum('ebcdimkl,amej->abcdijkl', tq, gs[v,o,v,o])&j/ikl&a/bcd
+S_{2b}& phpp& 0.5 * einsum('cdik,akcd->ai', td, gs[v,o,v,v])&&
+D_{5g}& phpp& einsum('ck,dbij,kacd->abij', ts, td, gs[o,v,v,v])&&ab
+T_{6e}& phpp& einsum('dl,ebcijk,lade->abcijk', ts, tt, gs[o,v,v,v])&&a/bc
+Q_{4c}& phpp& einsum('em,fbcdijkl,maef->abcdijkl', ts, tq, gs[o,v,v,v])&&a/bcd
+Q_{6h}& phpp& einsum('aeim,fcdjkl,mbef->abcdijkl', td, tt, gs[o,v,v,v])&i/jkl&a/b/cd
+S_{5b}& phpp& einsum('ci,dk,akcd->ai', ts, ts, gs[v,o,v,v])&&
+D_{5c}& phpp& einsum('ci,dbkj,akcd->abij', ts, td, gs[v,o,v,v])&ij&ab
+T_{6c}& phpp& einsum('di,ebcljk,alde->abcijk', ts, tt, gs[v,o,v,v])&i/jk&a/bc
+T_{3b}& phpp& einsum('adil,ecjk,lbde->abcijk', td, td, gs[o,v,v,v])&i/jk&abc
+Q_{4g}& phpp& einsum('ei,fbcdmjkl,amef->abcdijkl', ts, tq, gs[v,o,v,v])&i/jkl&a/bcd
+Q_{6e}& phpp& einsum('aeij,fcdmkl,bmef->abcdijkl', td, tt, gs[v,o,v,v])&ij/kl&a/b/cd
+Q_{6g}& phpp& -0.5 * einsum('efij,bcdmkl,amef->abcdijkl', td, tt, gs[v,o,v,v])&ij/kl&a/bcd
+D_{5e}& phpp& -0.5*einsum('ak,cdij,kbcd->abij', ts, td, gs[o,v,v,v])&&ab
+T_{3d}& phpp& -0.5 * einsum('abil,dejk,lcde->abcijk', td, td, gs[o,v,v,v])&i/jk&c/ab
+T_{6g}& phpp& -0.5*einsum('al,decijk,lbde->abcijk', ts, tt, gs[o,v,v,v])&&abc
+Q_{4f}& phpp& -0.5 * einsum('am,efcdijkl,mbef->abcdijkl', ts, tq, gs[o,v,v,v])&&a/b/cd
+Q_{6d}& phpp& -0.5 * einsum('abim,efdjkl,mcef->abcdijkl', td, tt, gs[o,v,v,v])&i/jkl&ab/c/d
+Q_{12c}& phpp& -0.5* einsum('am,ebij,fdkl,mcef->abcdijkl', ts, td, td, gs[o,v,v,v])&ij/kl&abcd
+T_{7a}& phpp& -einsum('di,al,ecjk,lbde->abcijk', ts, ts, td, gs[o,v,v,v])&i/jk&abc
+D_{8a}& phpp& -0.5 * einsum('ci,ak,dj,kbcd->abij', ts, ts, ts, gs[o,v,v,v])&ij&ab
+T_{7c}& phpp& -einsum('di,ej,bclk,alde->abcijk', ts, ts, td, gs[v,o,v,v])&k/ij&a/bc
+Q_{10a}& phpp& -0.5 * einsum('ei,fj,bcdmkl,amef->abcdijkl', ts, ts, tt, gs[v,o,v,v])&i/j/kl&a/bcd
+Q_{10b}& phpp& -einsum('ei,bm,fcdjkl,amef->abcdijkl', ts, ts, tt, gs[v,o,v,v])&i/jkl&a/b/cd
+Q_{12a}& phpp& -einsum('ei,abmj,fdkl,mcef->abcdijkl', ts, td, td, gs[o,v,v,v])&i/j/kl&ab/c/d
+S_{2c}& hhhp& -0.5 * einsum('ackl,klic->ai', td, gs[o,o,o,v])&&
+S_{5c}& hhhp& -einsum('ak,cl,klic->ai', ts, ts, gs[o,o,o,v])&&
+D_{5h}& hhhp& -einsum('ck,ablj,klci->abij', ts, td, gs[o,o,v,o])&ij&
+T_{6f}& hhhp& -einsum('dl,abcmjk,lmdi->abcijk', ts, tt, gs[o,o,v,o])&i/jk&
+T_{3c}& hhhp& -einsum('adil,bcmk,lmdj->abcijk', td, td, gs[o,o,v,o])&ijk&a/bc
+Q_{4d}& hhhp& -einsum('em,abcdnjkl,mnei->abcdijkl', ts, tq, gs[o,o,v,o])&i/jkl&
+Q_{6i}& hhhp& -einsum('aeim,bcdnkl,mnej->abcdijkl', td, tt, gs[o,o,v,o])&i/j/kl&a/bcd
+D_{5d}& hhhp& -einsum('ak,cblj,klic->abij', ts, td, gs[o,o,o,v])&ij&ab
+T_{6d}& hhhp& -einsum('al,dbcmjk,lmid->abcijk', ts, tt, gs[o,o,o,v])&i/jk&a/bc
+Q_{4h}& hhhp& -einsum('am,ebcdnjkl,mnie->abcdijkl', ts, tq, gs[o,o,o,v])&i/jkl&a/bcd
+Q_{6f}& hhhp& -einsum('abim,ecdnkl,mnje->abcdijkl', td, tt, gs[o,o,o,v])&i/j/kl&ab/cd
+D_{5f}& hhhp& 0.5 * einsum('ci,abkl,klcj->abij', ts, td, gs[o,o,v,o])&ij&
+T_{6h}& hhhp& 0.5 * einsum('di,abclmk,lmdj->abcijk', ts, tt, gs[o,o,v,o])&ijk&
+T_{3e}& hhhp& 0.5 * einsum('adij,bclm,lmdk->abcijk', td, td, gs[o,o,v,o])&k/ij&a/bc
+Q_{4e}& hhhp& 0.5 * einsum('ei,abcdmnkl,mnej->abcdijkl', ts, tq, gs[o,o,v,o])&i/j/kl&
+Q_{6c}& hhhp& 0.5 * einsum('aeij,bcdmnl,mnek->abcdijkl', td, tt, gs[o,o,v,o])&ij/k/l&a/bcd
+Q_{6j}& hhhp& 0.5 * einsum('abmn,ecdjkl,mnie->abcdijkl', td, tt, gs[o,o,o,v])&i/jkl&ab/cd
+D_{8b}& hhhp& 0.5 * einsum('ci,ak,bl,klcj->abij', ts, ts, ts, gs[o,o,v,o])&ij&ab
+T_{7b}& hhhp& einsum('di,al,bcmk,lmdj->abcijk', ts, ts, td, gs[o,o,v,o])&ijk&a/bc
+Q_{10c}& hhhp& einsum('am,ej,bcdnkl,mnie->abcdijkl', ts, ts, tt, gs[o,o,o,v])&i/j/kl&a/bcd
+Q_{12b}& hhhp& 0.5 * einsum('ei,abmj,cdnl,mnek->abcdijkl', ts, td, td, gs[o,o,v,o])&ijkl&ab/cd
+T_{7d}& hhhp&  einsum('al,bm,dcjk,lmid->abcijk', ts, ts, td, gs[o,o,o,v])&i/jk&c/ab
+Q_{10d}& hhhp& 0.5 * einsum('am,bn,ecdjkl,mnie->abcdijkl', ts, ts, tt, gs[o,o,o,v])&i/jkl&a/b/cd
+Q_{12d}& hhhp& -einsum('am,ebij,cdnl,mnek->abcdijkl', ts, td, td, gs[o,o,v,o])&ij/k/l&a/b/cd
+D_{1}& pphh& einsum('abij->abij', gs[v,v,o,o])&&
+S_{4a}& hhpp& -0.5 * einsum('ci,adkl,klcd->ai', ts, td, gs[o,o,v,v])&&
+D_{3d}& hhpp& -0.5 * einsum('aclk,dbij,klcd->abij', td, td, gs[o,o,v,v])&&ab
+T_{5d}& hhpp& -0.5 * einsum('adij,beclmk,lmde->abcijk', td, tt, gs[o,o,v,v])&k/ij&a/bc
+Q_{7f}& hhpp& -0.5 * einsum('aeij,bfcdmnkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&ij/kl&a/bcd
+Q_{8d}& hhpp& -0.5 * einsum('aebimn,fcdjkl,mnef->abcdijkl', tt, tt, gs[o,o,v,v])&i/jkl&ab/cd
+D_{3a}& hhpp& 0.25 * einsum('cdij,abkl,klcd->abij', td, td, gs[o,o,v,v])&&
+T_{5f}& hhpp& 0.25 * einsum('deij,abclmk,lmde->abcijk', td, tt, gs[o,o,v,v])&k/ij&
+Q_{7c}& hhpp& 0.25 * einsum('efij,abcdmnkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&ij/kl&
+Q_{8b}& hhpp& 0.25 * einsum('aefijk,bcdmnl,mnef->abcdijkl', tt, tt, gs[o,o,v,v])&ijk/l&a/bcd
+T_{5g}& hhpp& 0.25 * einsum('ablm,decijk,lmde->abcijk', td, tt, gs[o,o,v,v])&&c/ab
+Q_{7d}& hhpp& 0.25 * einsum('abmn,efcdijkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&&ab/cd
+S_{4b}& hhpp& -0.5 * einsum('ak,cdil,klcd->ai', ts, td, gs[o,o,v,v])&&
+T_{5e}& hhpp& -0.5 * einsum('abil,decjmk,lmde->abcijk', td, tt, gs[o,o,v,v])&i/jk&c/ab
+Q_{7g}& hhpp& -0.5 * einsum('abim,efcdjnkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&i/jkl&ab/cd
+S_{4c}& hhpp& einsum('ck,dali,klcd->ai', ts, td, gs[o,o,v,v])&&
+D_{3b}& hhpp& einsum('acik,bdjl,klcd->abij', td, td, gs[o,o,v,v])&ij&
+T_{5a}& hhpp& einsum('adil,ebcmjk,lmde->abcijk', td, tt, gs[o,o,v,v])&i/jk&a/bc
+T_{5b}& hhpp& -0.5 * einsum('deli,abcmjk,lmde->abcijk', td, tt, gs[o,o,v,v])&i/jk&
+T_{5c}& hhpp& -0.5 * einsum('dalm,ebcijk,lmde->abcijk', td, tt, gs[o,o,v,v])&&a/bc
+Q_{7e}& hhpp& einsum('aeim,fbcdnjkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&i/jkl&a/bcd
+Q_{8a}& hhpp& 0.5 * einsum('abeijm,fcdnkl,mnef->abcdijkl', tt, tt, gs[o,o,v,v])&ij/kl&ab/cd
+Q_{9b}& hhpp& 0.25 * einsum('aeij,bcmn,fdkl,mnef->abcdijkl', td, td, td, gs[o,o,v,v])&ij/kl&a/bc/d
+D_{7a}& hhpp& 0.5 * einsum('ci,abkl,dj,klcd->abij', ts, td, ts, gs[o,o,v,v])&&
+S_{6}& hhpp& -einsum('ci,ak,dl,klcd->ai', ts, ts, ts, gs[o,o,v,v])&&
+D_{7c}& hhpp& -einsum('ci,ak,dblj,klcd->abij', ts, ts, td, gs[o,o,v,v])&ij&ab
+D_{7d}& hhpp& -einsum('ck,di,ablj,klcd->abij', ts, ts, td, gs[o,o,v,v])&ij&
+D_{7e}& hhpp& -einsum('ck,al,dbij,klcd->abij', ts, ts, td, gs[o,o,v,v])&&ab
+D_{7b}& hhpp& 0.5 * einsum('ak,bl,cdij,klcd->abij', ts, ts, td, gs[o,o,v,v])&&
+D_{3c}& hhpp& -0.5 * einsum('dcik,ablj,klcd->abij', td, td, gs[o,o,v,v])&ij&
+D_{9}& hhpp& einsum('ci,dj,ak,bl,klcd->abij', ts, ts, ts, ts, gs[o,o,v,v])&&
+T_{9a}& hhpp& -einsum('dl,ei,abcmjk,lmde->abcijk', ts, ts, tt, gs[o,o,v,v])&i/jk&
+T_{9b}& hhpp& -einsum('dl,am,ebcijk,lmde->abcijk', ts, ts, tt, gs[o,o,v,v])&&a/bc
+T_{9c}& hhpp& 0.5 * einsum('di,ek,abcljm,lmde->abcijk', ts, ts, tt, gs[o,o,v,v])&j/ik&
+T_{9d}& hhpp& 0.5 * einsum('al,cm,dbeijk,lmde->abcijk', ts, ts, tt, gs[o,o,v,v])&&b/ac
+T_{9e}& hhpp& -einsum('di,al,ebcmjk,lmde->abcijk', ts, ts, tt, gs[o,o,v,v])&i/jk&a/bc
+T_{8b}& hhpp& -einsum('ej,adil,bcmk,lmde->abcijk', ts, td, td, gs[o,o,v,v])&ijk&a/bc
+T_{8d}& hhpp& 0.5 * einsum('di,ablm,ecjk,lmde->abcijk', ts, td, td, gs[o,o,v,v])&i/jk&c/ab
+T_{10a}& hhpp& einsum('di,al,ej,bcmk,lmde->abcijk', ts, ts, ts, td, gs[o,o,v,v])&k/ij&a/bc
+T_{10b}& hhpp& einsum('di,al,bm,ecjk,lmde->abcijk', ts, ts, ts, td, gs[o,o,v,v])&i/jk&c/ab
+T_{8a}& hhpp& -einsum('dl,abim,ecjk,lmde->abcijk', ts, td, td, gs[o,o,v,v])&i/jk&c/ab
+T_{8c}& hhpp& -einsum('bm,adil,ecjk,lmde->abcijk', ts, td, td, gs[o,o,v,v])&i/jk&abc
+T_{8e}& hhpp& 0.5 * einsum('al,deij,bcmk,lmde->abcijk', ts, td, td, gs[o,o,v,v])&k/ij&a/bc
+Q_{7a}& hhpp& -0.5 * einsum('efmi,abcdnjkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&i/jkl&
+Q_{8c}& hhpp& -0.5 * einsum('aefimj,bcdnkl,mnef->abcdijkl', tt, tt, gs[o,o,v,v])&ij/kl&a/bcd
+Q_{7b}& hhpp& -0.5 * einsum('eamn,fbcdijkl,mnef->abcdijkl', td, tq, gs[o,o,v,v])&&a/bcd
+Q_{9a}& hhpp& 0.25 * einsum('abim,efjk,cdnl,mnef->abcdijkl', td, td, td, gs[o,o,v,v])&i/jk/l&ab/cd
+Q_{9b}& hhpp& 0.25 * einsum('aeij,bcmn,fdkl,mnef->abcdijkl', td, td, td, gs[o,o,v,v])&ij/kl&a/bc/d
+Q_{9c}& hhpp& -einsum('aeij,bcmk,fdnl,mnef->abcdijkl', td, td, td, gs[o,o,v,v])&ij/k/l&a/bc/d
+Q_{11a}& hhpp& -einsum('em,fi,abcdnjkl,mnef->abcdijkl', ts, ts, tq, gs[o,o,v,v])&i/jkl&
+Q_{11b}& hhpp& -einsum('em,an,fbcdijkl,mnef->abcdijkl', ts, ts, tq, gs[o,o,v,v])&&a/bcd
+Q_{11c}& hhpp& 0.25 * einsum('ei,fj,abcdmnkl,mnef->abcdijkl', ts, ts, tq, gs[o,o,v,v])&i/j/kl&
+Q_{11d}& hhpp& 0.25 * einsum('am,bn,efcdijkl,mnef->abcdijkl', ts, ts, tq, gs[o,o,v,v])&&a/b/cd
+Q_{11e}& hhpp& -einsum('ei,am,fbcdnjkl,mnef->abcdijkl', ts, ts, tq, gs[o,o,v,v])&i/jkl&a/bcd
+Q_{13a}& hhpp& -einsum('em,afij,bcdnkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&ij/kl&a/bcd
+Q_{13b}& hhpp& -einsum('em,abin,fcdjkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&i/jkl&ab/cd
+Q_{13c}& hhpp& 0.5 * einsum('ei,abmn,fcdjkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&i/jkl&ab/cd
+Q_{13d}& hhpp& 0.5 * einsum('am,efij,bcdnkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&ij/kl&a/bcd
+Q_{13e}& hhpp& -einsum('fj,aeim,bcdnkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&i/j/kl&a/bcd
+Q_{13f}& hhpp& -einsum('bn,aeim,fcdjkl,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&i/jkl&a/b/cd
+Q_{13g}& hhpp& 0.5 * einsum('ei,fdkl,abcmjn,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&i/j/kl&abc/d
+Q_{13h}& hhpp& 0.5 * einsum('am,cdnl,ebfijk,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&ijk/l&a/b/cd
+Q_{13i}& hhpp& -einsum('fk,cdnl,abeijm,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&ij/k/l&ab/cd
+Q_{13j}& hhpp& -einsum('cn,fdkl,abeijm,mnef->abcdijkl', ts, td, tt, gs[o,o,v,v])&ab/c/d&ij/kl
+Q_{14a}& hhpp& 0.5 * einsum('ei,am,fj,bcdnkl,mnef->abcdijkl', ts, ts, ts, tt, gs[o,o,v,v])&i/j/kl&a/bcd
+Q_{14b}& hhpp& 0.5 * einsum('ei,am,bn,fcdjkl,mnef->abcdijkl', ts, ts, ts, tt, gs[o,o,v,v])&i/jkl&a/b/cd
+Q_{15a}& hhpp& 0.25 * einsum('ej,fk,abim,cdnl,mnef->abcdijkl', ts, ts, td, td, gs[o,o,v,v])&ijkl&ab/cd
+Q_{15b}& hhpp& 0.25 * einsum('bm,cn,aeij,fdkl,mnef->abcdijkl', ts, ts, td, td, gs[o,o,v,v])&ij/kl&abcd
+Q_{15c}& hhpp& einsum('fl,dn,aeij,bcmk,mnef->abcdijkl', ts, ts, td, td, gs[o,o,v,v])&ij/k/l&a/bc/d
+S_{7}& hhpp& 0.25 * einsum('aefimn,mnef->ai', tt, gs[o,o,v,v])&&
+D_{10a}& hp& einsum('me,abeijm->abij', fs[o,v], tt)&&
+D_{10b}& phpp& 0.5 * einsum('aefijm,bmef->abij', tt, gs[v,o,v,v])&&ab
+D_{10c}& hhhp& -0.5 * einsum('abeimn,mnje->abij', tt, gs[o,o,o,v])&ij&
+D_{11a}& hhpp& einsum('em,fabnij,mnef->abij', ts, tt, gs[o,o,v,v])&&
+D_{11b}& hhpp& -0.5 * einsum('am,efbinj,mnef->abij', ts, tt, gs[o,o,v,v])&&ab
+D_{11c}& hhpp& -0.5 * einsum('ei,afbmnj,mnef->abij', ts, tt, gs[o,o,v,v])&ij&
+D_{12}& hhpp& 0.25 * einsum('abefijmn,mnef->abij', tq, gs[o,o,v,v])&&
+T_{11a}& hp& einsum('me,abceijkm->abcijk', fs[o,v], tq)&&
+T_{11b}& phpp& 0.5 * einsum('abefijkm,cmef->abcijk', tq, gs[v,o,v,v])&&c/ab
+T_{11c}& hhhp& -0.5 * einsum('abcfijmn,mnkf->abcijk', tq, gs[o,o,o,v])&k/ij&
+T_{12a}& hhpp& einsum('em,fabcnijk,mnef->abcijk', ts, tq, gs[o,o,v,v])&&
+T_{12b}& hhpp& -0.5 * einsum('ei,afbcmnjk,mnef->abcijk', ts, tq, gs[o,o,v,v])&i/jk&
+T_{12c}& hhpp& -0.5 * einsum('am,efbcinjk,mnef->abcijk', ts, tq, gs[o,o,v,v])&&a/bc
